@@ -4,9 +4,12 @@ const keepAlive = require("./server")
 const PREFIX="-"
 const bot = new Discord.Client();
 const Enmap = require("enmap")
+const Canvas=require("canvas")
 bot.points = new Enmap({ name: "points" });
 const DisTube = require('distube');
 const distube = new DisTube(bot, { searchSongs: false, emitNewSongOnly: true, youtubeCookie: '__Secure-3PAPISID=8hoIJT50vPEtMF9M/Ams0gXiShMYGdUUqH;PREF=tz=America.New_York;'});
+const { registerFont, createCanvas } = require('canvas')
+registerFont('./Uni-Sans-Heavy.ttf', { family: 'Uni Sans' })
 //COMMANDS STUFF
 const fs = require('fs');
 bot.commands = new Discord.Collection();
@@ -207,7 +210,7 @@ bot.on('guildMemberAdd', async member => {
 
 	context.font = '28px "Uni Sans"';
 	context.fillStyle = '#FFFFFF';
-	context.fillText("Welcome to the Slxms' Discord,", canvas.width / 2.9, canvas.height / 3.5);
+	context.fillText("Welcome to Slxms' Discord,", canvas.width / 2.9, canvas.height / 3.5);
 
 	context.font = applyText(canvas, `${member.displayName}!`);
 	context.fillStyle = '#FFFFFF';
@@ -223,10 +226,13 @@ bot.on('guildMemberAdd', async member => {
 
 	const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
 
-	bot.channels.cache.get('894786569133768706').send(``, attachment);
-  member.send('Thanks for joining the server!', attachement)
-
+	bot.channels.cache.get('865710626381496320').send(``, attachment);
+  member.send('Thanks for joining the server!', attachment)
 });
+//simjoin
+bot.on('message', message=>{
+  bot.emit('guildMemerAdd', message.member);
+})
 //BAD WORDS
 const badwords = require("./src/badwords");
 badwords(bot)

@@ -22,7 +22,6 @@ client.on("message", message =>{
       db.set(`warnings_${message.guild.id}_${user2.id}`, 1)
     } else if(warnings !== null) {
       db.add(`warnings_${message.guild.id}_${user2.id}`, 1)
-      message.author.send(`You now have ${warnings} warning(s)`)
     }
   }
 });
