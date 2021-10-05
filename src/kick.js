@@ -15,7 +15,7 @@ module.exports = {
   .setFooter("Kick Command")
   .setTimestamp()
   message.channel.send(kickembed)
-  user.send(`You were kicked from Lxck DF's Discord Server`)
+  member.send(`You were kicked from Slxms' Discord Server`)
 
     member.kick()
     .catch(e =>{
